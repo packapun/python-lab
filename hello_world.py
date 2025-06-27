@@ -1,4 +1,48 @@
-print('Hello world')
+import math
+
+def mergeSort(arr): 
+    n = len(arr)
+    if n < 2:
+        return arr
+    mergeUtil(0, n-1, arr)
+    return arr
+
+def mergeUtil(l, r, arr):
+    if l < r:
+        m = (l + r) // 2  # Standard midpoint calculation
+        mergeUtil(l, m, arr)      # Left half: [l, m]
+        mergeUtil(m + 1, r, arr)  # Right half: [m+1, r]
+        mergeRoutine(l, m, r, arr)
+
+def mergeRoutine(l, m, r, arr):
+    # Create temporary arrays for left and right subarrays
+    leftArray = arr[l:m+1]    # [l, m] inclusive
+    rightArray = arr[m+1:r+1] # [m+1, r] inclusive
+    
+    i = j = 0
+    k = l  # Start merging back into original array at position l
+    
+    # Merge the two arrays
+    while i < len(leftArray) and j < len(rightArray):
+        if leftArray[i] <= rightArray[j]:
+            arr[k] = leftArray[i]
+            i += 1
+        else:
+            arr[k] = rightArray[j]
+            j += 1
+        k += 1
+    
+    # Copy remaining elements
+    while i < len(leftArray):
+        arr[k] = leftArray[i]
+        i += 1
+        k += 1
+    
+    while j < len(rightArray):
+        arr[k] = rightArray[j]
+        j += 1
+        k += 1
+
 
 def selectionSort(arr):
     # Find the smallest element and move it to the end of the sorted boundary 
@@ -46,6 +90,6 @@ def bubble_sort(a):
                 a[j],a[j+1] = a[j+1],a[j]
         print(a)
 
-a = [1,6,3,8,2,10,0]
-selectionSort(a)
+a = [6,5,4,3,2,1]
+mergeSort(a)
 print(a)
