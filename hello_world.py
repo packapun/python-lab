@@ -51,6 +51,31 @@ def twoSum(nums, target: int) -> int:
             hashMap[nums[i]] = i 
     return []
 
-    
 
-print(twoSum([1,2,3,5], 6))
+
+def isAnagram(s: str, t: str) -> bool:
+    # sorted(s) == sorted(t)
+    if len(s) != len(t):
+        return False
+    hashMap = dict() 
+    for x in s: 
+        if x in hashMap:
+            hashMap[x] += 1
+        else:
+            hashMap[x] = 1 
+    print(hashMap)
+
+    for x in t: 
+        if x not in hashMap:
+            return False
+        else:
+            hashMap[x] -= 1
+            if hashMap[x] == 0:
+                del hashMap[x]
+
+    print(hashMap)
+    return len(hashMap) == 0
+
+
+isAnagram = isAnagram('aamir','rimaa')
+print(isAnagram)
