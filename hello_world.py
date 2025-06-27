@@ -1,53 +1,45 @@
-# Let's implement a Linked List 
 import random
 
-# Define the node data structure
 class Node:
-    def __init__(self, data, ptr):
-        self.ptr = ptr 
+    def __init__(self, data,left=None, right=None):
+        self.left = left 
+        self.right = right 
         self.data = data
 
-# Define the linked list data structure
-class LinkedList:
-    def __init__(self):
-        self.root = None
-
     def __str__(self):
-        if self.isEmpty():
-            return "Empty Linked List"
-        else:
-            string = ""
-            p = self.root
-            while p:
-                string += "{}->".format(p.data)
-                p = p.ptr
-            string += "NULL"
-            return string
+        return "[{}]".format(self.data)
+    
+class BinarySearchTree:
+    def __init__(self, root=None):
+        self.root = root
 
-    def isEmpty(self):
-        return self.root is None
+    def insert(self, data):
+        self.root = self.insertUtil(self.root, data)
+    
+    def insertUtil(self, root, data):
+        if root is None:
+            return Node(data)
+        if data < root.data:
+            root.left = self.insertUtil(root.left,data)
+        elif data > root.data: 
+            root.right = self.insertUtil(root.right,data)        
+        return root 
+    
+    def inorderTraversal(self,root):
+        if root is None:
+            return 
+        self.inorderTraversal(root.left)
+        print(root)
+        self.inorderTraversal(root.right)
 
-    def addNode(self, data):
-        newNode = Node(data,None)
-        if self.isEmpty():
-            self.root = newNode
-        else:
-            p = self.root 
-            while p.ptr:
-                p = p.ptr 
-            p.ptr = newNode 
-        return self.root
+def testBinarySearchTree():
+    tree = BinarySearchTree(Node(10))
+    data = [random.randint(1,100) for _ in range(1,10)]
+    for x in data: 
+        tree.insert(x)
+        
+    tree.inorderTraversal(tree.root)
 
+testBinarySearchTree()
 
-def testLinkedList():
-    ll = LinkedList()
-    # data = [random.randint(1,1000) for x in range(10)]
-    data = [x*x for x in range(1,10)]
-
-    for i in data:
-        ll.addNode(i)
-
-    print(ll)
-
-
-testLinkedList()
+    
