@@ -90,6 +90,46 @@ def bubble_sort(a):
                 a[j],a[j+1] = a[j+1],a[j]
         print(a)
 
+# O(n*log(n))
+"""
+1. Decide on a pivot
+2. Move all elements less than the pivot to the left of the pivot 
+3. Move all element greater than the pivot to the right of the pivot 
+4. Repeat 1-3 for the left and right subarrays
+
+[5,4,3,12,1,7]
+[5,4,3,1,12,7]
+"""
+def quicksort(arr):
+    n = len(arr)
+    if n < 2:
+        return arr
+    quicksortUtil(arr,0,n-1)
+    
+
+def quicksortUtil(arr,l,r):
+    if l < r:
+        pivotIndex = partition(arr, l, r)
+        quicksortUtil(arr, l, pivotIndex-1)
+        quicksortUtil(arr, pivotIndex+1, r)
+            
+            
+def partition(arr,l,r):
+    pivot = arr[r]    
+
+    i = l - 1
+
+    for j in range(l,r):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i],arr[j] = arr[j],arr[i]
+    
+    arr[i+1],arr[r] = arr[r],arr[i+1]
+    return i + 1
+        
+        
+
+# Main Driver function
 a = [6,5,4,3,2,1]
-mergeSort(a)
+quicksort(a)
 print(a)
