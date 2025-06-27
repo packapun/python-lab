@@ -40,6 +40,17 @@ def testBinarySearchTree():
         
     tree.inorderTraversal(tree.root)
 
-testBinarySearchTree()
+
+def twoSum(nums, target: int) -> int:
+    hashMap = dict()
+    for i, num in enumerate(nums):
+        complement = target-num
+        if complement in hashMap:
+            return [i, hashMap[complement]]
+        else:
+            hashMap[nums[i]] = i 
+    return []
 
     
+
+print(twoSum([1,2,3,5], 6))
