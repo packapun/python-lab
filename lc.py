@@ -1,3 +1,18 @@
+def isValid(self, s: str) -> bool:
+    bracketMap = {'}': '{', ')': '(', ']': '['}
+    stack = []
+    
+    for char in s:
+        if char in bracketMap:  # closing bracket
+            if not stack or stack.pop() != bracketMap[char]:
+                return False
+        elif char in '{([':  # opening bracket
+            stack.append(char)
+        # ignore non-bracket characters (if any)
+    
+    return len(stack) == 0
+
+
 def twoSum(nums, target: int) -> int:
     hashMap = dict()
     for i, num in enumerate(nums):
