@@ -1,4 +1,4 @@
-import random 
+import random
 
 class Stack:
     def __init__(self, capacity:int=10):
