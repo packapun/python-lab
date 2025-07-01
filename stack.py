@@ -38,13 +38,3 @@ data = [random.randint(0,x) for x in range(1,20)]
 print(s)
 [s.pop() for x in data]
 print(s)
-
-
-
-
-
-
-
-
-    
-

@@ -1,7 +1,7 @@
 import random 
 
 CAPACITY = 10
-class Queue:
+class CustomQueue:
     def __init__(self, capacity:int=CAPACITY):
         self.capacity = capacity
         self._items = []
