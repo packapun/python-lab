@@ -75,3 +75,20 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         for i in range(0,k):
             output += [heappop(h)[1]]
         return output
+
+def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        char_index = {}
+        left = 0 
+        max_length = 0 
+        current_length = 0 
+        for right in range(len(s)):
+            char = s[right]
+            if char in char_index and char_index[char] >= left:
+                left = char_index[char]+1
+            char_index[char] = right 
+            current_length = right - left + 1 
+            if current_length > max_length:
+                max_length = current_length 
+        return max(current_length, max_length)
