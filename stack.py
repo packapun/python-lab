@@ -30,8 +30,6 @@ class Stack:
         if self.isEmpty():
             return None 
         return self._items[len(self._items) - 1]
-    
-
 
 
 s = Stack(capacity=10)
