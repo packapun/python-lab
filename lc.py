@@ -1,3 +1,5 @@
+from heapq import heappush, heappop
+from collections import Counter
 def isValid(self, s: str) -> bool:
     bracketMap = {'}': '{', ')': '(', ']': '['}
     stack = []
@@ -62,3 +64,14 @@ def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         else:
             anagram_groups[key] = [string]
     return list(anagram_groups.values())
+
+
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        h = [] 
+        c = Counter(nums)
+        for c,v in c.items():
+            heappush(h,(-v,c))
+        output = []
+        for i in range(0,k):
+            output += [heappop(h)[1]]
+        return output
