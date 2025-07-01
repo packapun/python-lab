@@ -1,34 +1,54 @@
-import random 
+from collections import defaultdict 
+from stack import Stack
 
-CAPACITY = 10
-class Queue:
-    def __init__(self, capacity:int=CAPACITY):
-        self.capacity = capacity
-        self._items = []
+class Graph(object):
+    def __init__(self, directed=False):
+        self._graph = defaultdict(list)
+        self._directed = directed
 
-    def is_full(self):
-        return len(self._items) == self.capacity
+
+    def addConnections(self, connections):
+        for v1,v2,weight in connections:
+            self.add(v1,v2,weight)
+
+    def add(self, v1,v2,weight):
+        self._graph[v1].append((v2,weight))
+        if not self._directed:
+            self._graph[v2].append((v1,weight))
+
+    def showGraph(self):
+        for item in self._graph.items():
+            print(item)
+
+
+    def performDFS(self):
+        """Perform basic DFS search"""
+        s = Stack() 
+        op = []
+        s.push('A')
+        self._dfs(s,op)
+
+    def _dfs(self, S:Stack, op):
+        if not S:
+            return 
+        current = S.peek()
+        for v in self._graph[current]:
+            if v[0] not in op and v[0] not in S._items:
+                S.push(v[0])
+                self._dfs(S,op)
+        e = S.pop()
+        print(e, end=" => ")
+        op.append(e)
+
     
-    def is_empty(self) :
-        return not self._items
 
-    def enqueue(self, x):
-        if self.is_full():
-            raise OverflowError("queue is full")
-        self._items.append(x)
-    
-    def dequeue(self):
-        if self.is_empty():
-            raise IndexError("dequeue from empty queue")
-        return self._items.pop(0)
-        
-    def front(self):
-        if self.is_empty():
-            return None 
-        return self._items[0]
+def testGraph():
+    graph_connections = [('A', 'B', 4), ('A', 'C', 1), ('A', 'E', 5), ('B', 'A', 4), ('B', 'D', 1),
+                         ('C', 'A', 1), ('C', 'D', 1), ('C', 'F', 2), ('D', 'B', 1), ('D', 'C', 1),
+                         ('E', 'A', 4), ('E', 'F', 1), ('F', 'C', 2), ('F', 'E', 1)]
+    g = Graph(True)
+    g.addConnections(graph_connections)
+    g.showGraph()
+    g.performDFS()
 
-    def back(self):
-        if self.is_empty():
-            return None 
-        return self._items[len(self._items)-1]
-
+testGraph()

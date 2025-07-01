@@ -32,9 +32,9 @@ class Stack:
         return self._items[len(self._items) - 1]
 
 
-s = Stack(capacity=10)
-data = [random.randint(0,x) for x in range(1,20)]
-[s.push(x) for x in data]
-print(s)
-[s.pop() for x in data]
-print(s)
+# s = Stack(capacity=10)
+# data = [random.randint(0,x) for x in range(1,20)]
+# [s.push(x) for x in data]
+# print(s)
+# [s.pop() for x in data]
+# print(s)

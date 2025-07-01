@@ -52,3 +52,13 @@ def isAnagram(s: str, t: str) -> bool:
 isAnagram = isAnagram('aamir','rimaa')
 print(isAnagram)
 
+
+def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    anagram_groups = {}
+    for string in strs: 
+        key = str(sorted(string))
+        if key in anagram_groups:
+            anagram_groups[key] += [string]
+        else:
+            anagram_groups[key] = [string]
+    return list(anagram_groups.values())
