@@ -111,5 +111,40 @@ def longestOnes(self, nums: List[int], k: int) -> int:
             left += 1
         max_size = max(max_size, right - left + 1)
     return max_size 
+
+"""
+https://leetcode.com/problems/insert-interval/description/
+Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+Output: [[1,5],[6,9]]
+"""
+
+def insert(intervals: [[int]], newInterval: [int]) -> [[int]]:
+    if not intervals or not intervals[0]:
+        return []
+    result = []
+    i = 0
+    s,t = newInterval[0],newInterval[1]
+    n = len(intervals)
+
+    while i < n and intervals[i][1] < s:
+        result.append(intervals[i])
+        i += 1
+
+    start = newInterval[0]
+    end = newInterval[1]
+
+    while i < n and intervals[i][0] <= end:
+        start = min(start,intervals[i][0])
+        end = max(end, intervals[[i][1]])
+        i += 1
+    
+    result.append([start,end])
+
+    while i < n:
+        result.append(intervals[i])
+        i += 1
+    
+    return result
+
         
 
