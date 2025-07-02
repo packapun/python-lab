@@ -1,54 +1,37 @@
-from collections import defaultdict 
-from stack import Stack
+input = [[1,4],[0,4]]
 
-class Graph(object):
-    def __init__(self, directed=False):
-        self._graph = defaultdict(list)
-        self._directed = directed
-
-
-    def addConnections(self, connections):
-        for v1,v2,weight in connections:
-            self.add(v1,v2,weight)
-
-    def add(self, v1,v2,weight):
-        self._graph[v1].append((v2,weight))
-        if not self._directed:
-            self._graph[v2].append((v1,weight))
-
-    def showGraph(self):
-        for item in self._graph.items():
-            print(item)
-
-
-    def performDFS(self):
-        """Perform basic DFS search"""
-        s = Stack() 
-        op = []
-        s.push('A')
-        self._dfs(s,op)
-
-    def _dfs(self, S:Stack, op):
-        if not S:
-            return 
-        current = S.peek()
-        for v in self._graph[current]:
-            if v[0] not in op and v[0] not in S._items:
-                S.push(v[0])
-                self._dfs(S,op)
-        e = S.pop()
-        print(e, end=" => ")
-        op.append(e)
-
+sorted_input = sorted(input, key= lambda x: x[0])
+print(sorted_input)
+start = None
+end = None
+output = []
+for interval in sorted_input: 
+    curr_start,curr_end = interval[0],interval[1]
+    if start is None or end is None:
+        print("base case, updating start and end")
+        start = curr_start 
+        end = curr_end
+        print(curr_start,curr_end, start,end)
+        continue 
     
+    print(curr_start,curr_end, start,end)
 
-def testGraph():
-    graph_connections = [('A', 'B', 4), ('A', 'C', 1), ('A', 'E', 5), ('B', 'A', 4), ('B', 'D', 1),
-                         ('C', 'A', 1), ('C', 'D', 1), ('C', 'F', 2), ('D', 'B', 1), ('D', 'C', 1),
-                         ('E', 'A', 4), ('E', 'F', 1), ('F', 'C', 2), ('F', 'E', 1)]
-    g = Graph(True)
-    g.addConnections(graph_connections)
-    g.showGraph()
-    g.performDFS()
+    if curr_start > end:
+        print("Move to the next interval ")
+        # Move to the next interval 
+        output.append([start,end])
+        start = curr_start 
+        end = curr_end
+    elif curr_start <= end and curr_end > end:
+        print("Update end ")
+        end = curr_end
 
-testGraph()
+    print(curr_start,curr_end, start,end)
+
+output.append([start,end])
+
+print(output)        
+
+
+
+
