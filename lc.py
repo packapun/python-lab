@@ -186,6 +186,43 @@ def letterCombinations(self, digits: str) -> List[str]:
         backtrack(0,"")
         return result        
 
+def compress(chars):
+    """
+    Compress string in-place using consecutive character counting.
+    
+    Args:
+        chars: List of characters to compress
+    
+    Returns:
+        int: New length of the compressed array
+    """
+    if not chars:
+        return 0
+    
+    # Two pointers: read for reading, write for writing
+    read = 0
+    write = 0
+    
+    while read < len(chars):
+        current_char = chars[read]
+        count = 1
         
+        # Count consecutive occurrences of current character
+        while read + count < len(chars) and chars[read + count] == current_char:
+            count += 1
         
-
+        # Write the character
+        chars[write] = current_char
+        write += 1
+        
+        # If count > 1, write the count as string characters
+        if count > 1:
+            count_str = str(count)
+            for digit in count_str:
+                chars[write] = digit
+                write += 1
+        
+        # Move read pointer to next group
+        read += count
+    
+    return write
