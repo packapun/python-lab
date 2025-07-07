@@ -1,37 +1,43 @@
-input = [[1,4],[0,4]]
+from typing import List
+from collections import Counter
 
-sorted_input = sorted(input, key= lambda x: x[0])
-print(sorted_input)
-start = None
-end = None
-output = []
-for interval in sorted_input: 
-    curr_start,curr_end = interval[0],interval[1]
-    if start is None or end is None:
-        print("base case, updating start and end")
-        start = curr_start 
-        end = curr_end
-        print(curr_start,curr_end, start,end)
-        continue 
+def longestConsecutive(nums: List[int]) -> int:
+    if not nums:
+        return 0
+        
+    number_set = set()
+    seq_length = 0
+    max_length = 0
     
-    print(curr_start,curr_end, start,end)
+    for x in nums:
+        number_set.add(x)
 
-    if curr_start > end:
-        print("Move to the next interval ")
-        # Move to the next interval 
-        output.append([start,end])
-        start = curr_start 
-        end = curr_end
-    elif curr_start <= end and curr_end > end:
-        print("Update end ")
-        end = curr_end
+    for x in nums:
+        if x not in number_set:
+                continue
+        # print("Processing {}".format(x))
+        number_set.remove(x)
+        seq_length = 1
+        i = x + 1
+    
+        while i in number_set:
+            # print("Looking for {}".format(i))
+            # print(number_set, seq_length)
+            seq_length += 1
+            number_set.remove(i)
+            i = i+1
+            
+        i = x - 1
+        while i in number_set:
+            # print("Looking for {}".format(i))
+            # print(number_set, seq_length)
+            seq_length += 1
+            number_set.remove(i)
+            i = i-1
+        # print("Max length = {}".format(max_length))
+        max_length = max(max_length, seq_length)
+    return max_length
+    
 
-    print(curr_start,curr_end, start,end)
-
-output.append([start,end])
-
-print(output)        
-
-
-
-
+input = [0]
+print(longestConsecutive(input))
