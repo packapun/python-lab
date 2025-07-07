@@ -265,3 +265,67 @@ def longestConsecutive(nums: List[int]) -> int:
         max_length = max(max_length, seq_length)
     return max_length
     
+
+    
+    
+    
+
+"""
+## LC 1152
+VisitEvent(timestamp, username, website_id)
+username = [aamir,aamir,aamir,azhar...]
+timestamp = [1,2,3,4...]
+website = [a,b,c,a...]
+
+Find the pattern which occurs the most across all users
+aamir -> a,b,c
+david -> a,b,c
+
+Pattern : abc 
+
+Simple approach: 
+1. Find all the 3-website patterns for each user
+2. For each pattern, keep a counter 
+3. increment the counter as users visit websites
+4. return the pattern with the highest count
+
+
+aamir -> a,b,c,d
+Patterns : abc,bcd,acd,abd
+
+[
+aamir:abcdaadd,
+azhar:aaaabbbb
+]
+
+[abc:3,bcd:2,acd:1,abd:1]
+
+"""
+def most_visited_pattern(self, usernames:List[str], websites:List[int], timestamps:List[int]) -> List[str]:
+    users_visits = defaultdict(list)
+
+    for user, _, site in sorted(zip(usernames,timestamps,websites), key=lambda x:x[1]):
+        users_visits[user].append(site)
+    patterns_count = Counter()
+    for sites in users_visits.values():
+        number_of_sites = len(sites)
+        unique_patterns = set()
+        if number_of_sites > 2:
+            for i in range(number_of_sites-2):
+                for j in range(i+1,number_of_sites-1):
+                    for k in range(j+1,number_of_sites):
+                        unique_patterns.add((sites[i],sites[j],sites[k]))
+        
+        for pattern in unique_patterns:
+            patterns_count[pattern] += 1
+        
+    return sorted(patterns_count.items(), key=lambda x:(-x[1],x[0]))[0][0]
+
+
+
+
+
+
+
+
+
