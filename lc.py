@@ -322,6 +322,17 @@ def most_visited_pattern(self, usernames:List[str], websites:List[int], timestam
     return sorted(patterns_count.items(), key=lambda x:(-x[1],x[0]))[0][0]
 
 
+def print_permutations(s:str):
+    def permute(chars,start=0):
+        if start == len(chars):
+            print(''.join(chars))
+        for i in range(start, len(chars)):
+            chars[start],chars[i] = chars[i],chars[start]
+            permute(chars,i+1)
+            chars[start],chars[i] = chars[i],chars[start]
+    
+    permute(list(s))
+    print()
 
 
 
