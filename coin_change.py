@@ -1,7 +1,3 @@
-
-coins = [1,2,3]
-sum = 4
-
 def count_rec(coins, n, sum):
     if sum == 0:
         return 1
