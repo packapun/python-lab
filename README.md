@@ -9,7 +9,7 @@ This repository contains various Python implementations including:
 - **Algorithms**: Sorting algorithms, pattern matching, string manipulation
 - **LeetCode Solutions**: Common coding interview problems and solutions
 - **Practice Problems**: Various algorithmic challenges and implementations
-
+TODO add interview experiences
 ## Repository Structure
 
 ```
