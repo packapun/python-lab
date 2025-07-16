@@ -335,7 +335,25 @@ def print_permutations(s:str):
     print()
 
 
-
+# https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+# O(n*m). KMP is better
+def strStr(self, haystack: str, needle: str) -> int:
+    if not haystack or not needle:
+        return -1
+    start = needle[0]
+    for i in range(0,len(haystack)):
+        current_char = haystack[i]
+        if current_char == start:
+            j = 1
+            while (i+j) < len(haystack) and j < len(needle):
+                if haystack[i+j] == needle[j]:
+                    j += 1
+                else:
+                    break
+            if j == len(needle):
+                return i
+    return -1
+        
 
 
 
