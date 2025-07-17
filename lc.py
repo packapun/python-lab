@@ -353,6 +353,22 @@ def strStr(self, haystack: str, needle: str) -> int:
             if j == len(needle):
                 return i
     return -1
+
+def gcdOfStrings(self, str1: str, str2: str) -> str:
+    m, n = len(str1), len(str2)
+    
+    if m == 0 or n == 0:
+        return ""
+    
+    gcd_len = math.gcd(m, n)
+    candidate = str1[:gcd_len]  # Always use str1 as source
+    
+    # Check if candidate can construct both strings
+    if (candidate * (m // gcd_len) == str1 and 
+        candidate * (n // gcd_len) == str2):
+        return candidate
+    
+    return ""
         
 
 
