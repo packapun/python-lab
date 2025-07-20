@@ -1,4 +1,4 @@
-# Python Lab
+no# Python Lab
 
 A collection of Python programming experiments, algorithm implementations, and coding practice solutions.
 
@@ -9,7 +9,7 @@ This repository contains various Python implementations including:
 - **Algorithms**: Sorting algorithms, pattern matching, string manipulation
 - **LeetCode Solutions**: Common coding interview problems and solutions
 - **Practice Problems**: Various algorithmic challenges and implementations
-TODO add interview experiences
+TODO add interview experiences and mocks.
 ## Repository Structure
 
 ```
