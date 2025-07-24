@@ -4,6 +4,7 @@ from typing import List
 # TwoSum [x]
 # isPalindrome[x]
 # longestPrefix[x]
+# isValid[x]
 # Stack [ ]
 # Queue  using [ ]
 # LinkedList [ ]
@@ -54,6 +55,26 @@ def longestCommonPrefix(self, strs: List[str]) -> str:
                     return longest_prefix
         longest_prefix += letter
     return longest_prefix
+
+
+def isValid(self, s: str) -> bool:
+    if not s:
+        return False
+    mapping = {'}':'{', ']':'[', ')':'('}
+    stack = []
+
+    for char in s:
+        if char in mapping:
+            # closing bracket
+            if len(stack) == 0 :
+                return False 
+            top = stack.pop()
+            if top != mapping[char]:
+                return False 
+        else:
+            # opening bracket
+            stack.append(char)
+    return len(stack) == 0
 
 
 
