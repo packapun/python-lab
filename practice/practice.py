@@ -4,6 +4,7 @@ from typing import List
 # isPalindrome[x]
 # longestPrefix[x]
 # isValid[x]
+# reverseLL [x]
 # majorityElement[x]
 # Stack [ ]
 # Queue  using [ ]
@@ -92,6 +93,17 @@ def majorityElement(self, nums: List[int]) -> int:
                 element = x 
                 votes = 1 
     return element
+
+
+def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    if not head or not head.next:
+        return head
+
+    new_head = self.reverseList(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
+
 
 nums = [4,6,1,2]
 target = 8 
