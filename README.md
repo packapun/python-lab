@@ -1,4 +1,4 @@
-no# Python Lab
+# Python Lab
 
 A collection of Python programming experiments, algorithm implementations, and coding practice solutions.
 
