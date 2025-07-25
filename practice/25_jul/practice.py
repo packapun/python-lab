@@ -1,4 +1,47 @@
-from typing import List
+# LC Practice 25th July
+
+# Selection sort 
+
+"""
+What does this algorithm do? 
+1. Find the smallest element in the unsorted portion 
+2. Add this element to the sorted portion of the list 
+3. Do this till all elements are inside the sorted portion 
+"""
+from typing import List 
+
+# Sorts an array in O(n^2) time 
+def selection_sort(nums:List[int]):
+    i = -1 
+    n = len(nums) # 5
+
+    while i < n-1:
+        min_value = nums[i+1] # 5
+        min_index = i+1 # 0
+        
+        for j in range(i+2, n):
+            if nums[j] < min_value: # 4 < 5
+                min_value = nums[j] # 1
+                min_index = j  # 4
+
+        i += 1 # 0
+        nums[min_index],nums[i] = nums[i], nums[min_index] # swap index 0 and 4
+    print(f"Final sorted version {nums}")
+        
+
+# Test selection sort
+def test_selection_sort():
+    nums = [5,4,3,2,1]
+    selection_sort(nums)
+    assert nums == [1,2,3,4,5]
+    print("test case passed")
+
+
+test_selection_sort()
+
+#------------------------------------
+
+
 # Implement Quick Sort
 """
 Algorithm:
