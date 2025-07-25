@@ -99,3 +99,41 @@ def test_suite():
 test_suite()
 
 # TOS (time to solution) : 16m37s
+
+#  ---------- 
+
+
+def mergesort(nums:List[int], left, right):
+    if left < right:
+        mid = (left + right)//2
+        mergesort(nums,left, mid)
+        mergesort(nums,mid+1, right)
+        merge(nums,left,mid,right)
+        
+
+def merge(nums:List[int], left:int, mid:int, right:int):
+    left_subarray = nums[left:mid+1]
+    right_subarray = nums[mid+1:right+1]
+    k = left 
+    i = 0 
+    j = 0 
+    while i<len(left_subarray) and j<len(right_subarray):
+        if left_subarray[i] < right_subarray[j]:
+            nums[k] = left_subarray[i]
+            i += 1
+        else:
+            nums[k] = right_subarray[j]
+            j += 1
+        k += 1
+
+    while i < len(left_subarray):
+            nums[k] = left_subarray[i]
+            i += 1
+            k += 1
+
+    while j < len(right_subarray):
+            nums[k] = right_subarray[j]
+            j += 1
+            k += 1
+
+
