@@ -99,7 +99,6 @@ def test_suite():
 test_suite()
 
 # TOS (time to solution) : 16m37s
-
 #  ---------- 
 
 
@@ -137,3 +136,80 @@ def merge(nums:List[int], left:int, mid:int, right:int):
             k += 1
 
 
+# =======
+"""
+Problem Statement:
+Implement the following class:
+
+MovingAverage(int size): Initializes with the window size.
+
+double next(int val): Adds val to the stream and returns the moving average of the last size values.
+
+If there are fewer than size values in the stream so far, return the average over the values present.
+
+MovingAverage movingAverage = new MovingAverage(3);
+movingAverage.next(1);   // returns 1.0
+movingAverage.next(10);  // returns 5.5
+movingAverage.next(3);   // returns 4.66667
+movingAverage.next(5);   // returns 6.0
+
+"""
+from collections import deque
+
+class MovingAverage: 
+    def __init__(self,window_size:int):
+        self.window_size = window_size 
+        self._count = 0
+        self._sum = 0
+        self.storage = deque()
+
+
+    def next(self,value:int) -> float:
+        # Add value to collection 
+        if self._count < self.window_size:
+            self.storage.append(value)
+            self._count += 1
+        else: 
+            x = self.storage.popleft()
+            self._sum -= x
+            self.storage.append(value)
+        
+        self._sum += value 
+        print("storage : {}".format(self.storage))
+        
+        # Return the average 
+        average = self.calculate_average(self._sum, self._count)
+        print("average : {}".format(sum))
+        return average
+
+    
+
+def test_moving_average():
+    window_size = 3
+    mov_average = MovingAverage(window_size)
+    assert mov_average.next(1) == 1.0
+    assert mov_average.next(10) == 5.5
+    assert mov_average.next(3) == 4.666666666666667
+    assert mov_average.next(5) == 6.0
+    
+
+def test_calculatesum():
+    pass 
+
+def test_suite():
+    test_calculatesum()
+    test_moving_average()
+
+test_suite()
+
+# TOS : 15min 
+# ===========
+
+# Invert given binary tree
+def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    if not root:
+        return None
+    root.left,root.right = root.right,root.left
+    root.left = self.invertTree(root.left)
+    root.right = self.invertTree(root.right)
+    return root

@@ -1,58 +1,8 @@
-from typing import List
-# Implement Quick Sort
-"""
-Algorithm:
-1. Choose a pivot element
-2. Move all elements less than the pivot to the left
-3. Move all element greater than the pivot to the right 
-4. Swap the pivot to the index between these two sections 
-5. Repeat for the left and right sections 
-
-Time : O(n*logn)
-Space : O(logn)
-"""
-
-def quicksort(nums:List[int], l , r):
-    if l < r:
-        mid = partition(nums,l,r)
-        quicksort(nums,l,mid-1)
-        quicksort(nums,mid+1,r)
-     
-def partition(nums, l, r):
-    pivot_index = r
-    pivot = nums[r]
-    i = l
-    for k in range(l,r):
-        if nums[k] < pivot:
-            nums[k],nums[i] = nums[i],nums[k]
-            i += 1
-    nums[pivot_index],nums[i] = nums[i],nums[pivot_index]
-    print("Partition output : {}".format(nums[l:r+1]))
-    return i
-    
-
-def test_quicksort():
-     nums = [5,4,3,2,1]
-     quicksort(nums, 0, len(nums)-1)
-     print("testcase:quicksort output {}".format(nums))
-     assert nums == [1,2,3,4,5]
-
-def test_partition():
-    nums = [1,2,3,4,5]
-    index = partition(nums,0,len(nums)-1)
-    assert index == 4
-    assert nums == [1,2,3,4,5]
-    
-    nums = [5,4,3,2,1]
-    index = partition(nums,0,len(nums)-1)
-    assert index == 0
-    assert nums == [1,4,3,2,5]
-    
-
-def test_suite():
-    test_partition()
-    test_quicksort()
-
-test_suite()
-
-# TOS (time to solution) : 16m37s
+# Invert given binary tree
+def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    if not root:
+        return None
+    root.left,root.right = root.right,root.left
+    root.left = self.invertTree(root.left)
+    root.right = self.invertTree(root.right)
+    return root
