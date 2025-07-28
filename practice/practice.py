@@ -110,3 +110,28 @@ target = 8
 ret = twoSum(nums, target)
 print(ret)
 
+
+
+# ====
+def maxArea(self, height: List[int]) -> int:
+    if not height:
+        return 0
+
+    n = len(height)
+    left = 0
+    right = n-1
+    max_area = 0 
+    while left < right:
+        curr_area = (right - left)*min(height[left], height[right])
+        max_area = max(max_area, curr_area)
+        if height[left] < height[right]:
+            # Move left 
+            left += 1
+        else:
+            # Move right
+            right -= 1
+    return max_area
+
+# TTS : <=5min
+
+# ===
