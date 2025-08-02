@@ -30,7 +30,6 @@ class Graph:
         for vertex in self.adj_list:
             print(f"{vertex} : {self.adj_list[vertex]}")
 
-
     def bfs(self, start_vertex) -> List:
         bfs_order = []
         visited = set()
@@ -46,6 +45,24 @@ class Graph:
                     queue.append(n)
         return bfs_order
 
+    def dfs(self, start_vertex):
+        if start_vertex not in self.adj_list:
+            return []
+        
+        visited = set()
+        order = []
+
+        def dfs_helper(start_vertex):
+            visited.add(start_vertex)
+            for n in self.getNeighbours(start_vertex):
+                if n not in visited:
+                    dfs_helper(n)
+            order.append(start_vertex)
+        
+        dfs_helper(start_vertex)
+        return order 
+
+    
 # Create an undirected graph
 print("=== Undirected Graph Example ===")
 g = Graph(directed=False)
@@ -59,6 +76,7 @@ print("Graph adjacency list:")
 g.display()
 
 print(f"\nBFS traversal starting from vertex 0: {g.bfs(0)}")
+print(f"\DFS traversal starting from vertex 0: {g.dfs(0)}")
 
 
 
