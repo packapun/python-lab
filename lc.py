@@ -1,5 +1,5 @@
 from typing import List
-from collections import Counter
+from collections import Counter,defaultdict
 from heapq import heappush, heappop
 
 def isValid(self, s: str) -> bool:
