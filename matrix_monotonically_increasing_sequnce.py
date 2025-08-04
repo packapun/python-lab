@@ -130,5 +130,9 @@ print(f"Test 3 result: {findLongestSequence(matrix4)}")
 matrix5 = [[42]]
 print(f"Test 4 result: {findLongestSequence(matrix5)}")
 
+"""
+The algorithm has a time complexity of O(4^(m×n)) in the worst case, where m and n are the matrix dimensions, since each cell can potentially explore 4 directions recursively.
+"""
+
 
 
