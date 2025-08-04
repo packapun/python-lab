@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from collections import Counter,defaultdict
 from heapq import heappush, heappop
 
@@ -405,4 +405,34 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 
 
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        """
+        Time Complexity: O(n log n)
+        Space Complexity: O(log n)
+        """
+        if not head:
+            return None
+        
+        if not head.next:
+            return TreeNode(head.val)
+
+        slow = fast = head
+        prev = None 
+        while fast and fast.next:
+            prev = slow 
+            slow = slow.next
+            fast = fast.next.next 
+
+        if prev:
+            prev.next = None 
+
+        root = TreeNode(slow.val)
+        root.left = self.sortedListToBST(head if prev else None)
+        root.right = self.sortedListToBST(slow.next)
+        return root
