@@ -436,3 +436,37 @@ def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         root.left = self.sortedListToBST(head if prev else None)
         root.right = self.sortedListToBST(slow.next)
         return root
+
+# LC 1094
+def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        max_location = max(trip[2] for trip in trips)
+        diff = [0] * (max_location + 1)
+        for passengers, start, end in trips:
+            diff[start] += passengers
+            diff[end] -= passengers
+        current_passengers = 0 
+        for change in diff:
+            current_passengers += change 
+            if current_passengers > capacity:
+                return False 
+        return True
+
+
+# LC 958
+def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+
+        queue = deque([root])
+        found_null = False
+        while queue:
+            node = queue.popleft()
+            
+            if node is None:
+                found_null = True
+            else:
+                if found_null:
+                    return False
+                queue.append(node.left)
+                queue.append(node.right)
+        return True
