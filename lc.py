@@ -642,3 +642,34 @@ def findKthLargestWithMinHeap(self, nums: List[int], k: int) -> int:
         if x > heap[0]:
             heapq.heapreplace(heap,x)
     return heap[0] 
+
+# LC 76 [Hard] O(n) time
+def minWindow(self, s: str, t: str) -> str:
+    if len(s) < len(t):
+        return ""
+
+    # Count characters needed 
+    need = Counter(t)
+    missing = len(t)
+
+    left = start = 0 
+    min_len = float('inf')
+
+    for right in range(len(s)):
+        if s[right] in need:
+            if need[s[right]] > 0:
+                missing -= 1
+            need[s[right]] -= 1
+
+        while missing == 0:
+            if right - left + 1 < min_len:
+                start = left 
+                min_len = right - left + 1
+            
+            if s[left] in need:
+                need[s[left]] += 1
+                if need[s[left]] > 0:
+                    missing += 1
+            left += 1
+
+    return s[start:start + min_len] if min_len != float('inf') else ""
