@@ -673,3 +673,30 @@ def minWindow(self, s: str, t: str) -> str:
             left += 1
 
     return s[start:start + min_len] if min_len != float('inf') else ""
+
+# LC 438 Find anagrams in O(n)
+
+def findAnagrams(self, s: str, p: str) -> List[int]:
+    if len(s) < len(p) or not s or not p:
+        return []
+    p_count = Counter(p)
+    s_count = Counter()
+    output = []
+    for i in range(len(p)):
+        s_count[s[i]] += 1
+
+    if p_count == s_count:
+        output.append(0)
+
+    for i in range(len(p), len(s)):
+        s_count[s[i]] += 1
+
+        charToRemove = s[i - len(p)]
+        s_count[charToRemove] -= 1
+        if s_count[charToRemove] <= 0:
+            del s_count[charToRemove]
+                    
+        if s_count == p_count:
+            output.append(i - len(p) + 1)
+
+    return output
