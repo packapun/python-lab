@@ -610,3 +610,24 @@ def mergeList(self, list1, list2):
     tail.next = list1 if list1 else list2 
     return dummy.next
 # ==
+
+# LC 167
+def twoSum_part2(self, numbers: List[int], target: int) -> List[int]:
+        if not numbers:
+            return []
+        n = len(numbers)
+        left = 0
+        right = n-1
+
+        while left < right:
+            total = numbers[left] + numbers[right]
+            if total > target:
+                right -= 1
+            elif total < target:
+                left += 1
+            else:
+                return [left+1,right+1]
+        return []
+
+
+#== 
