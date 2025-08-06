@@ -550,3 +550,63 @@ def assignTasks(self, servers: List[int], tasks: List[int]) -> List[int]:
         heapq.heappush(busy, (current_time + task_duration, weight, server_idx))
     
     return result
+
+# LC21
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        tail = dummy
+
+        while list1 and list2:
+            if list1.val <= list2.val:
+                tail.next = list1
+                list1 = list1.next 
+            else:
+                tail.next = list2
+                list2 = list2.next 
+            tail = tail.next 
+        tail.next = list1 if list1 else list2 
+        return dummy.next 
+
+## LC 148 ==
+def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head 
+        
+        fast = head
+        slow = head 
+        prev = None
+        while fast and fast.next:
+            fast = fast.next.next 
+            prev = slow
+            slow = slow.next 
+        
+        # Break the list and sort the two halves individually
+        prev.next = None
+        left = self.sortList(head)
+        right = self.sortList(slow)
+        return self.mergeList(left,right)
+    
+def mergeList(self, list1, list2):
+    # Merge two sorted lls 
+    dummy = ListNode(0)
+    tail = dummy 
+    
+    while list1 and list2:
+        if list1.val <= list2.val:
+            tail.next = list1 
+            list1 = list1.next
+        else:
+            tail.next = list2
+            list2 = list2.next 
+        tail = tail.next 
+    
+    tail.next = list1 if list1 else list2 
+    return dummy.next
+# ==
