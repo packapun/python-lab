@@ -1,6 +1,6 @@
 from typing import List, Optional
 from collections import Counter,defaultdict
-from heapq import heappush, heappop
+from heapq import heappush, heappop, heapify
 
 def isValid(self, s: str) -> bool:
     bracketMap = {'}': '{', ')': '(', ']': '['}
@@ -512,3 +512,41 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
     for i in range(n):
         output.append(prefix[i]*suffix[i])
     return output
+
+
+# LC 1882 
+
+def assignTasks(self, servers: List[int], tasks: List[int]) -> List[int]:
+    n, m = len(servers), len(tasks)
+
+    # min-heap of available servers on the basis of weight 
+    available = [(servers[i],i) for i in range(n)]
+    heapq.heapify(available)
+
+    # min-heap of busy servers based on free_time 
+    busy = []
+    result = []
+    current_time = 0
+
+    for task_idx in range(m):
+        current_time = max(current_time, task_idx)
+        while busy and busy[0][0] <= current_time:
+            free_time,weight,server_idx = heapq.heappop(busy)
+            heapq.heappush(available, (weight,server_idx))
+
+        if not available:
+            free_time,weight,server_idx = heapq.heappop(busy)
+            current_time = free_time 
+            heapq.heappush(available, (weight,server_idx))
+        
+            while busy and busy[0][0] <= current_time:
+                free_time,weight,server_idx = heapq.heappop(busy)
+                heapq.heappush(available, (weight,server_idx))
+
+        weight, server_idx = heapq.heappop(available)
+        result.append(server_idx)
+
+        task_duration = tasks[task_idx]
+        heapq.heappush(busy, (current_time + task_duration, weight, server_idx))
+    
+    return result
