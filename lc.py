@@ -631,3 +631,14 @@ def twoSum_part2(self, numbers: List[int], target: int) -> List[int]:
 
 
 #== 
+# LC 215 
+def findKthLargestWithMinHeap(self, nums: List[int], k: int) -> int:
+    if k <= 0 or k > len(nums):
+        return None
+    heap = nums[:k]
+    heapq.heapify(heap)
+    
+    for x in nums[k:]:
+        if x > heap[0]:
+            heapq.heapreplace(heap,x)
+    return heap[0] 
