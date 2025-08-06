@@ -700,3 +700,61 @@ def findAnagrams(self, s: str, p: str) -> List[int]:
             output.append(i - len(p) + 1)
 
     return output
+
+
+# LC 102
+def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        parentQueue = deque()
+        childQueue = deque()
+        parentQueue.append(root)
+        output = []
+        while parentQueue or childQueue:
+            levelOutput = []
+            
+            while parentQueue:
+                node = parentQueue.popleft()
+                if node.left:
+                    childQueue.append(node.left)
+                if node.right:
+                    childQueue.append(node.right)
+                levelOutput.append(node.val)
+            output.append(levelOutput)
+            parentQueue, childQueue = childQueue, parentQueue
+        return output    
+
+
+
+# LC 207
+def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    # Adjacency list in 3 lines wao
+    graph = defaultdict(list)
+    for course, prereq in prerequisites:
+        graph[course].append(prereq)
+
+    states = [0]*numCourses
+
+    def hasCycle(course) -> bool:
+        if states[course] == 1:
+            return True 
+        
+        if states[course] == 2:
+            return False 
+
+        states[course] = 1
+
+        for prereq in graph[course]:
+            if hasCycle(prereq):
+                return True
+        
+        states[course] = 2
+        return False 
+        
+    for course in range(numCourses):
+        if states[course] == 0 and hasCycle(course):
+            return False 
+        
+    return True
+
+    
