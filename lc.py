@@ -148,6 +148,18 @@ def insert(intervals: [[int]], newInterval: [int]) -> [[int]]:
     
     return result
 
+"""
+def backtrack(current_state):
+    if is_complete(current_state):
+        result.append(copy_of(current_state))
+        return
+    
+    for choice in available_choices:
+        make_choice(choice)
+        backtrack(current_state)
+        undo_choice(choice)  # Backtrack
+"""
+
 def subsets(self, nums: List[int]) -> List[List[int]]:
     result = []
     def backtrack(start, current_subset):
@@ -862,3 +874,16 @@ def mergeIntervals(self, intervals: List[List[int]]) -> List[List[int]]:
         else:
             merged.append(current)
     return merged 
+
+# LC 560
+def subarraySum(self, nums: List[int], k: int) -> int:
+        count = 0
+        prefix_sum = 0 
+        prefix_count = {0:1}
+
+        for num in nums:
+            prefix_sum += num 
+            if prefix_sum - k in prefix_count:
+                count += prefix_count[prefix_sum-k]
+            prefix_count[prefix_sum] = prefix_count.get(prefix_sum,0) + 1
+        return count
