@@ -825,3 +825,23 @@ def search(self, nums: List[int], target: int) -> int:
         return binarySearch(0,pivot-1,target)
     else:
         return binarySearch(pivot,len(nums)-1,target)
+    
+# LC 278
+def isBadVersion(x):
+    return False
+
+def firstBadVersion(self, n: int) -> int:
+    if n == 0:
+        return 0
+    left = 0 
+    right = n 
+    while left <= right:
+        mid = (left+right)//2
+        if isBadVersion(mid):
+            if not isBadVersion(mid-1):
+                return mid
+            else:
+                right = mid-1
+        else:
+            left = mid+1
+    return 0
