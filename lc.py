@@ -774,3 +774,21 @@ def robUtil(self, nums:List[int], index:int) -> int:
     if index >= len(nums):
         return 0
     return max(self.robUtil(nums,index+1), nums[index] + self.robUtil(nums, index+2))
+
+
+# LC 322
+def coinChange(self, coins: List[int], amount: int) -> int:
+    if not coins:
+        return -1
+    
+    dp = [float('inf')]*(amount+1)
+    dp[0] = 0
+
+    for i in range(1,len(dp)):
+        for j in range(len(coins)):
+            coin = coins[j]
+            if coin <= i:
+                dp[i] = min(1+dp[i-coin], dp[i])
+    if dp[-1] == float('inf'):
+        return -1
+    return dp[-1]
