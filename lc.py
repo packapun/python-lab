@@ -792,3 +792,36 @@ def coinChange(self, coins: List[int], amount: int) -> int:
     if dp[-1] == float('inf'):
         return -1
     return dp[-1]
+
+# LC 33 Search in a rotated array
+def search(self, nums: List[int], target: int) -> int:
+    def findPivot():
+        left,right = 0, len(nums)-1
+        while left < right:
+            mid = (left+right)//2
+            if nums[mid] > nums[right]:
+                left = mid+1
+            else:
+                right = mid
+        return left 
+    
+    def binarySearch(start,end,target):
+        left,right = start,end 
+        while left <= right:
+            mid = (left + right)//2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return -1
+    
+    if not nums:
+        return -1
+
+    pivot = findPivot()
+    if target >= nums[0] and pivot > 0:
+        return binarySearch(0,pivot-1,target)
+    else:
+        return binarySearch(pivot,len(nums)-1,target)
