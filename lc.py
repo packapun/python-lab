@@ -757,4 +757,20 @@ def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
     return True
 
-    
+# LC 198
+def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        n = len(nums)
+        dp = [0]*(n+1)
+        dp[1] = nums[0]
+        for i in range(2,len(dp)):
+            dp[i] = max(nums[i-1]+dp[i-2], dp[i-1])
+        print(dp)
+        return dp[-1]
+
+        
+def robUtil(self, nums:List[int], index:int) -> int:
+    if index >= len(nums):
+        return 0
+    return max(self.robUtil(nums,index+1), nums[index] + self.robUtil(nums, index+2))
