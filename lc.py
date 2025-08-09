@@ -887,3 +887,35 @@ def subarraySum(self, nums: List[int], k: int) -> int:
                 count += prefix_count[prefix_sum-k]
             prefix_count[prefix_sum] = prefix_count.get(prefix_sum,0) + 1
         return count
+
+
+# LC 286
+def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        m = len(rooms)
+        n = len(rooms[0])
+        if not m or not n:
+            return 
+        queue = deque()
+        for i in range(m):
+            for j in range(n):
+                if rooms[i][j] == 0:
+                    queue.append((i,j))
+
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        visited = set()
+        while queue:
+            x,y = queue.popleft()
+            visited.add((x,y))
+            for di,dj in directions:
+                ni,nj = x+di,y+dj
+                isValid = (0<=ni<m) and (0<=nj<n)
+                if isValid and rooms[ni][nj] == 2147483647:
+                    rooms[ni][nj] = rooms[x][y] + 1
+                    if (ni,nj) not in visited:
+                        visited.add((ni,nj))
+                        queue.append((ni,nj))
+
+
