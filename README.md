@@ -10,6 +10,7 @@ This repository contains various Python implementations including:
 - **LeetCode Solutions**: Common coding interview problems and solutions
 - **Practice Problems**: Various algorithmic challenges and implementations
 TODO add interview experiences and mocks.
+TODO create a boss rush mode
 ## Repository Structure
 
 ```
