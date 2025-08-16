@@ -45,6 +45,7 @@ python-lab/
 - **Stack** (`stack.py`): Stack implementation with push/pop operations
 - **Heap** (`heap.py`): Min/max heap implementation
 - **Queue** (`custom_queue.py`, `queue_circular_buffer.py`): Various queue implementations
+- TODO: Add Fenwick tree
 
 ### Algorithms
 - **Two Sum** (`main.py`): Multiple approaches to the classic two sum problem
